@@ -1,2 +1,2 @@
 # cnum
-Cálculo Númerico
+Cálculo Numérico
