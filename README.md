@@ -1,2 +1,2 @@
-# crum
+# cnum
 Cálculo Númerico
