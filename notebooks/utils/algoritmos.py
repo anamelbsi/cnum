@@ -3,6 +3,29 @@ import math
 import numpy as np
 
 
+def interpolacao_polinomial(x, y, x_novo):
+    """Avalia o polinomio interpolador por meio da forma de Lagrange."""
+    x = np.asarray(x, dtype=float)
+    y = np.asarray(y, dtype=float)
+    x_novo = np.asarray(x_novo, dtype=float)
+
+    if x.ndim != 1 or y.ndim != 1 or x.size != y.size:
+        raise ValueError("x e y devem ser vetores unidimensionais de mesmo tamanho.")
+    if x.size == 0:
+        raise ValueError("Os dados de interpolacao nao podem estar vazios.")
+
+    resultado = np.zeros_like(x_novo, dtype=float)
+    for j in range(x.size):
+        termo = np.ones_like(x_novo, dtype=float)
+        for k in range(x.size):
+            if k != j:
+                if x[j] == x[k]:
+                    raise ValueError("Os pontos x devem ser distintos.")
+                termo *= (x_novo - x[k]) / (x[j] - x[k])
+        resultado += y[j] * termo
+    return resultado
+
+
 def medio(f, a, b):
     """Regra de quadratura pelo ponto medio."""
     h = b - a
