@@ -3,6 +3,21 @@ import math
 import numpy as np
 
 
+def dp(f, x, h):
+    """Derivada por diferenca finita progressiva de primeira ordem."""
+    return (f(x + h) - f(x)) / h
+
+
+def dr(f, x, h):
+    """Derivada por diferenca finita regressiva de primeira ordem."""
+    return (f(x) - f(x - h)) / h
+
+
+def dc(f, x, h):
+    """Derivada por diferenca finita central de segunda ordem."""
+    return (f(x + h) - f(x - h)) / (2 * h)
+
+
 def regressao(x, y, v):
     """Ajusta coeficientes pelo metodo dos minimos quadrados."""
     x = np.asarray(x, dtype=float)
