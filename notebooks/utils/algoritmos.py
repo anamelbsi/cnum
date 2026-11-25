@@ -3,6 +3,38 @@ import math
 import numpy as np
 
 
+def medio(f, a, b):
+    """Regra de quadratura pelo ponto medio."""
+    h = b - a
+    return h * f((a + b) / 2)
+
+
+def trapezio(f, a, b):
+    """Regra de quadratura pelo trapezio."""
+    h = b - a
+    return h * (f(a) + f(b)) / 2
+
+
+def simpson(f, a, b):
+    """Regra de quadratura de Simpson."""
+    h = (b - a) / 2
+    return h * (f(a) + 4 * f((a + b) / 2) + f(b)) / 3
+
+
+def integral(metodo, f, a, b, n=1e-3):
+    """Aplica uma quadratura simples em subintervalos de largura n."""
+    if n <= 0:
+        raise ValueError("n deve ser maior que zero.")
+
+    s = 0.0
+    c = a
+    while c < b:
+        d = min(c + n, b)
+        s += metodo(f, c, d)
+        c = d
+    return s
+
+
 def dp(f, x, h):
     """Derivada por diferenca finita progressiva de primeira ordem."""
     return (f(x + h) - f(x)) / h
