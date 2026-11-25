@@ -3,6 +3,21 @@ import math
 import numpy as np
 
 
+def regressao(x, y, v):
+    """Ajusta coeficientes pelo metodo dos minimos quadrados."""
+    x = np.asarray(x, dtype=float)
+    y = np.asarray(y, dtype=float)
+    V = np.asarray(v(x), dtype=float)
+
+    if V.ndim != 2:
+        raise ValueError("v(x) deve retornar uma matriz bidimensional.")
+    if V.shape[0] != y.size:
+        raise ValueError("x e y devem ter o mesmo numero de pontos.")
+
+    A, _, _, _ = np.linalg.lstsq(V, y, rcond=None)
+    return A
+
+
 def _approx_fprime(x, f):
     """Aproxima a derivada por diferenças finitas sem depender de SciPy."""
     x = np.asarray(x, dtype=float)
